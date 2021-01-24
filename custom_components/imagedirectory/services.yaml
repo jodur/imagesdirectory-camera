@@ -1,0 +1,89 @@
+camera_update_image_filelist:
+  description: Use this service to change the files (jpg/png) displayed by the camera.
+  fields:
+    entity_id:
+      description: Name of the entity_id of the camera to update
+      example: 'camera.local_file'
+    sourcepath:
+      description: The path to the directory that contains the images
+      example: '/config/www/images'
+    delay_time:
+      description: Time between 2 frames in camera (OPTIONAL)
+      example: 1.0 
+    exclude:
+      description: list of files (jpg/png) to exclude in the camera (OPTIONAL)
+      example: 'latest_snaphot.jpg'
+    begintimestamp:
+      description: Start time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 12:00:00'
+    endtimestamp:
+      description: End time for filest to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 13:00:00'  
+    lasthours:
+      description: Select only files from last x hours since lastfile (OPTIONAL, 0.0 (DEFAULT) select all files in timerange)
+      example: '1.0'
+camera_clear_image_filelist:
+  description: Use this service to change the files (jpg/png) displayed by the camera.
+  fields:
+    entity_id:
+      description: Name of the entity_id of the camera to update
+      example: 'camera.local_file'      
+create_gif_mp4:
+  description: Create GIF/MP4 from selected snapshots
+  fields:
+    sourcepath:
+      description: path of the directory where the snaphots are in
+      example: '/config/snapshots'
+    destinationpath: 
+      description: path of the directory where the GIF/MP4 should be created
+      example: '/config/www'    
+    filename:
+      description: Name for gif/mp4 file (OPTIONAL, default='latest')
+      example: 'latest'
+    format:
+       description: Output to gif or mp4 (OPTIONAL, default='gif')  
+       example: 'mp4'       
+    exclude:
+        description: list of files (jpg) to exclude in the output
+        example: 'latest_snaphot.jpg'
+    begintimestamp:
+      description: Start time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 12:00:00'
+    endtimestamp:
+      description: End time for filest to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 13:00:00'
+delete_files:
+  description: Delete files (jpg, gif or mp4)  
+  fields:
+    sourcepath:
+      description: path of the directory where to delete the files
+      example: '/config/snapshots'
+    exclude:
+        description: list of files (jpg, gif or mp4) to exclude in the deletion
+        example: 'latest_snaphot.jpg'  
+    begintimestamp:
+      description: Start time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 12:00:00'
+    endtimestamp:
+      description: End time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 13:00:00'
+move_files:
+  description: Move files (jpg, gif or mp4)
+  fields:
+    sourcepath:
+      description: path of the directory where the files are in
+      example: '/config/snapshots'
+    destinationpath: 
+      description: path of the directory where to move the files
+      example: '/config/archive'       
+    exclude:
+        description: list of files (jpg, gif or mp4) to exclude in the move
+        example: 'latest_snaphot.jpg'
+    begintimestamp:
+      description: Start time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 12:00:00'
+    endtimestamp:
+      description: End time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
+      example: '26/12/2021 13:00:00'
+          
+

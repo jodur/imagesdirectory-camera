@@ -1,0 +1,12 @@
+{
+  "domain": "imagedirectory",
+  "name": "Local Image Filelist",
+  "documentation": "https://github.com/jodur/imagedirectory",
+  "requirements": [
+                  "pillow",
+                  "imageio",
+                  "imageio-ffmpeg"
+                  ],
+  "dependencies": [],
+  "codeowners": ["@jodur"]
+}
