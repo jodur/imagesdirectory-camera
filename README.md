@@ -1,5 +1,5 @@
 # Imagedirectory
-Homeassistant custom component for serveral operations on snapshots images and display the images in a **native homeassistant camera** entity.
+Homeassistant custom component for serveral operations on snapshots images and display the images in a **homeassistant camera** entity.
 
 Supported operations:
 - compose an animated GIF or MP4 of selected snapshot (PNG, JPEG)
@@ -15,9 +15,9 @@ This integration provides 3 methods for this:
 - display the snapshots with a camera entity within homeassistant
 	The camera is using the selected snapshots directly from files  **without** a intermediate format
 
-The platform is designed for general use of converting snapshot to GIF or MP4, so it is useful for everyone who has to handle or deal with snapshots created by cameras of image processing software. The component can also be used to create a slideshow of pictures or create a timelaps video/camera from pictures in a directory
+The platform is designed for general use of converting snapshots to animated GIF or MP4, so it is useful for everyone who has to handle or deal with snapshots created by cameras of image processing software. The component can also be used to create a slideshow of pictures or create a timelaps video/camera from pictures in a directory
 
-Platform setup
+# Platform setup
 
 To use this component, copy the directory `imagedirectory`and it contents to the `custom_components` directory of your homeassistant.
 
@@ -53,13 +53,13 @@ This service has to be called with the following calll-parameters:
 |  destinationpath |  path of the directory where the GIF should be created |  mandatory, directory must exist |
 |  filename |	Name for gif/mp3 file (without extension)   | optional, default=latest  |
 |  format |  `gif` or `mp4` | optional, default='gif'   |
-| excludelist  |  list of files to exclude in conversion |optional   |
+| exclude  |  list of files to exclude in conversion |optional   |
 | begintimestamp  |  begin timestamp | optional, format 'mm/dd/yyyy hh:mm:ss'   |
 | endtimestamp  | end timestamp  |  optional, format 'mm/dd/yyyy hh:mm:ss'   |
 
 ## File selection
 
-With the parameter `excludelist` you could **exclude** certain files that should not be added in the created output file (gif or mp4)
+With the parameter `exclude` you could **exclude** certain files that should not be added in the created output file (gif or mp4)
 
 Most solutions create a timestamped snapshot file and also a snapshot file with a fixed filename (for exampe: deepstack_object_xxxx_latest.jpg).  In most cases you want to exclude such a file in the output file.
 
@@ -161,21 +161,22 @@ For example the event, in case of the service call: ` imagedirectort.create_gif_
 ```
 # Camera entity
 
-Altough the generated gif or mp4 could be easyli displayed using the existing available camera entities in homeassistant, the availbilty of a camera component that is capable of directly serving the images to a camera component is much easier, more flexible and more user friendly.
+Altough the generated gif or mp4 could be easily displayed using the existing available camera entities in homeassistant, the availbilty of a camera component that is capable of directly serving the images to a camera component is much easier, more flexible and more user friendly.
 
 ## Configuration
 To enable this camera in your installation, you must first have an existing directory with images files
-Next, add the following to your `configuration.yaml` file:
+Next, add the following to your `configuration.yaml` file in the camera section:
 
 
-    - platform: imagedirectory
-      name: oprit_motion
-      sourcepath: /config/snapshots/oprit
-      excludelist: deepstack_object_camera_oprit_latest.jpg 
-      lasthours: 2.0 
-    
-
-The example above selects only the files, from the last 2 hours, since the time of the latest file in the directory `/config/snapshots/oprit` to display in the camera with a default delay of 1 sec between the images.
+```yaml
+camera:
+  - platform: imagedirectory
+     name: achtertuin_motion
+     sourcepath: /config/snapshots/achtertuin
+     excludelist: deepstack_object_achtertuin_latest.jpg 
+     lasthours: 2.0
+```
+The example above selects only the files, from the last 2 hours, since the time of the latest file in the directory `/config/snapshots/achtertuin` to display in the camera with a default delay of 1 sec between the images.
 
 
 ## Configuration variables
@@ -192,9 +193,9 @@ The example above selects only the files, from the last 2 hours, since the time 
 
 The file selection function defined by exclude and the timestamps are identical as in the use with `imagedirectory.create_gif_mp4` service.
 
-The only addition is the `lasthours` parameter that allows you to select only the latest `x` hours from the latest images within the given timerange. This parameters allows you to only include the snapshots that are made for example the last 2 hours to display in the camera.
+The only addition is the `lasthours` parameter that allows you to select only the latest `x.x` hours from the latest images within the given timerange. This parameters allows you to only include the snapshots that are made (for example) the last 2 hours to display in the camera.
 
-The No. of files and the selected files that the camera is using is available as Attribute and could be examind under the developer tools unde the STATES tab.
+The No. of files and the selected files that the camera is using are available as Attribute and could be examined under the developer tools under the STATES tab.
 
 ## Camera services
 
@@ -358,12 +359,12 @@ mode: single
 
 ```
 
-#### Example 2: Script to archive snapshot from the past day to a mp4
+### Example 2: Script to archive snapshots from the past day to a mp4
 
-This example shows an script to archive the created snaphots that a made during the previous automating. I schedule this script for example at 00:05:00
+This example shows an script to archive the created snaphots, that a made during the previous automation. I schedule this script for example at 00:05:00
 
 **Step 1**
-Create begintime and endtime for the imagedirectory services. With the variable daysback you can control from which day you want to archive the snapshots. In mycase i want to archive the previous day. The file that is created will have a date  in its filename included
+Create begintime and endtime for the imagedirectory services. With the variable `daysback` you can control from which day you want to archive the snapshots. In mycase i want to archive the previous day. The file that is created will have a date  in its filename included
 
 **Step 2**
 Create the MP4 
