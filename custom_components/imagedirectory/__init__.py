@@ -17,7 +17,7 @@ DOMAIN ='imagedirectory'
 
 _LOGGER = logging.getLogger(__name__)
 
-from homeassistant.const import CONF_NAME
+from homeassistant.const import CONF_EXCLUDE
 
 SERVICE_CREATE = 'create_gif_mp4'
 SERVICE_DEL= 'delete_files'
@@ -27,13 +27,13 @@ SERVICE_PARAM_SOURCE='sourcepath'
 SERVICE_PARAM_DESTINATION='destinationpath'
 SERVICE_PARAM_FILENAME='filename'
 SERVICE_PARAM_FORMAT='format'
-SERVICE_PARAM_EXCLUDE=CONF_NAME
+SERVICE_PARAM_EXCLUDE=CONF_EXCLUDE
 SERVICE_PARAM_BEGINTIME='begintimestamp'
 SERVCE_PARAM_ENDTIME='endtimestamp'
 EPOCH_START='01/01/1970 00:00:00'
 EPOCH_END='31/12/9999 23:59:59'
 
-SNAPTOGIF_START_SCHEMA = vol.Schema(			
+SNAPTOGIF_CREATE_SCHEMA = vol.Schema(			
     {
         vol.Required(SERVICE_PARAM_SOURCE): cv.isdir,
 		vol.Required(SERVICE_PARAM_DESTINATION): cv.isdir,
@@ -198,7 +198,7 @@ def setup(hass, config):
 	#register services to homeassistant
 	hass.services.register(
 		DOMAIN, SERVICE_CREATE, Imagedirectory_Services,
-		schema=SNAPTOGIF_START_SCHEMA)
+		schema=SNAPTOGIF_CREATE_SCHEMA)
 	hass.services.register(
 		DOMAIN, SERVICE_DEL, Imagedirectory_Services,
 		schema=SNAPTOGIF_DEL_SCHEMA)	
