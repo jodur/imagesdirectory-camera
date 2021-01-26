@@ -1,3 +1,4 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
 # Imagedirectory
 Homeassistant custom component for serveral operations on snapshots images and display the images in a **homeassistant camera** entity.
 
