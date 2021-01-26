@@ -20,7 +20,7 @@ The platform is designed for general use of converting snapshots to animated GIF
 
 # Platform setup
 
-To use this component, copy the directory `imagedirectory`and it contents to the `custom_components` directory of your homeassistant.
+To use this component, copy the directory `imagedirectory`and it contents to the `custom_components` directory of your homeassistant or use hacs and add this repository as custom repository to hacs.
 
 Add the following line in your `configuration.yaml:`
 ```yaml
