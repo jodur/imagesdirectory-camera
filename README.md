@@ -132,12 +132,12 @@ For example the event, in case of the service call: ` imagedirectort.create_gif_
 {
     "event_type": "imagedirectory",
     "data": {
-        "Type": "create_gif_mp4",
+        "type": "create_gif_mp4",
         "file": "mylatest.gif",
-        "Path": "/config/www",
-        "BeginTimeStamp": "26/12/2020 14:17:00",
-        "EndTimeStamp": "26/12/2020 14:17:59",
-        "NoComposedImages": 9,
+        "path": "/config/www",
+        "beginTimeStamp": "26/12/2020 14:17:00",
+        "endTimeStamp": "26/12/2020 14:17:59",
+        "no_files": 9,
         "sourcepath": "/config/snapshots/achtertuin",
         "sourcefiles": [
             "deepstack_object_achtertuin_2020-12-26_14-17-02.jpg",
@@ -342,7 +342,7 @@ trigger:
   - platform: event
     event_type: imagedirectory
     event_data:
-      Type: create_gif_mp4
+      type: create_gif_mp4
       sourcepath: /config/snapshots/achtertuin
 condition:
   - condition: state
