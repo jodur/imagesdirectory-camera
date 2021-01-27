@@ -342,7 +342,7 @@ trigger:
   - platform: event
     event_type: snaptogif
     event_data:
-      Type: create
+      Type: create_gif_mp4
       sourcepath: /config/snapshots/achtertuin
 condition:
   - condition: state
