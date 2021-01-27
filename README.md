@@ -340,7 +340,7 @@ alias: Notify new detection achtertuin
 description: ''
 trigger:
   - platform: event
-    event_type: snaptogif
+    event_type: imagedirectory
     event_data:
       Type: create_gif_mp4
       sourcepath: /config/snapshots/achtertuin
