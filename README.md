@@ -174,7 +174,7 @@ camera:
   - platform: imagedirectory
      name: achtertuin_motion
      sourcepath: /config/snapshots/achtertuin
-     excludelist: deepstack_object_achtertuin_latest.jpg 
+     exclude: deepstack_object_achtertuin_latest.jpg 
      lasthours: 2.0
 ```
 The example above selects only the files, from the last 2 hours, since the time of the latest file in the directory `/config/snapshots/achtertuin` to display in the camera with a default delay of 1 sec between the images.
