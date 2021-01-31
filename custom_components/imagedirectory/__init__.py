@@ -30,6 +30,7 @@ SERVICE_PARAM_FORMAT='format'
 SERVICE_PARAM_EXCLUDE=CONF_EXCLUDE
 SERVICE_PARAM_BEGINTIME='begintimestamp'
 SERVCE_PARAM_ENDTIME='endtimestamp'
+SERVICE_PARAM_LASTHOURS='lasthours'
 EPOCH_START='01/01/1970 00:00:00'
 EPOCH_END='31/12/9999 23:59:59'
 
@@ -42,6 +43,7 @@ SNAPTOGIF_CREATE_SCHEMA = vol.Schema(
 		vol.Optional(SERVICE_PARAM_EXCLUDE,default=[]):cv.ensure_list_csv,
 		vol.Optional(SERVICE_PARAM_BEGINTIME,default=EPOCH_START):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
 		vol.Optional(SERVCE_PARAM_ENDTIME,default=EPOCH_END):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
+		vol.Optional(SERVICE_PARAM_LASTHOURS, default=0.0):cv.positive_float,
     }
 	)
 
@@ -51,6 +53,7 @@ SNAPTOGIF_DEL_SCHEMA = vol.Schema(
 		vol.Optional(SERVICE_PARAM_EXCLUDE,default=[]):cv.ensure_list_csv,
 		vol.Optional(SERVICE_PARAM_BEGINTIME,default=EPOCH_START):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
 		vol.Optional(SERVCE_PARAM_ENDTIME,default=EPOCH_START):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
+		vol.Optional(SERVICE_PARAM_LASTHOURS, default=0.0):cv.positive_float,
     }
 	)
 SNAPTOGIF_MOVE_SCHEMA = vol.Schema(			
@@ -60,6 +63,7 @@ SNAPTOGIF_MOVE_SCHEMA = vol.Schema(
 		vol.Optional(SERVICE_PARAM_EXCLUDE,default=[]):cv.ensure_list_csv,
 		vol.Optional(SERVICE_PARAM_BEGINTIME,default=EPOCH_START):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
 		vol.Optional(SERVCE_PARAM_ENDTIME,default=EPOCH_START):cv.matches_regex(r'[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
+		vol.Optional(SERVICE_PARAM_LASTHOURS, default=0.0):cv.positive_float,
     }
 	)
 
@@ -84,7 +88,7 @@ def Getfileslist(path,exclude,begintime,endtime,extensions,lasthours=0.0):
 	files.sort(key=lambda x:os.path.getmtime(os.path.join(path, x)))
 	
 	#only last xx hours filtering active
-	if lasthours>0.0:
+	if lasthours>0.0 and len(files)>1:
 		#timestamp latest file in selected range
 		latest=GetTimestampFile(path,files[-1])
 		#Get images defined by lasthours from latest file
@@ -180,7 +184,7 @@ def setup(hass, config):
 		
 		#get files in source path and use the defined critera to filter the list
 		files=Getfileslist(call.data[SERVICE_PARAM_SOURCE],call.data[SERVICE_PARAM_EXCLUDE],call.data[SERVICE_PARAM_BEGINTIME],
-							call.data[SERVCE_PARAM_ENDTIME],ext)
+							call.data[SERVCE_PARAM_ENDTIME],ext,call.data[SERVICE_PARAM_LASTHOURS])
 		
 		_LOGGER.debug(f'No of images/files found for operation {len(files)}')
 		

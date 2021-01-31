@@ -52,6 +52,9 @@ create_gif_mp4:
     endtimestamp:
       description: End time for filest to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
       example: '26/12/2021 13:00:00'
+    lasthours:
+      description: Select only files from last x hours since lastfile (OPTIONAL, 0.0 (DEFAULT) select all files in timerange)
+      example: '1.0'  
 delete_files:
   description: Delete files (jpg, gif or mp4)  
   fields:
@@ -67,6 +70,9 @@ delete_files:
     endtimestamp:
       description: End time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
       example: '26/12/2021 13:00:00'
+    lasthours:
+      description: Select only files from last x hours since lastfile (OPTIONAL, 0.0 (DEFAULT) select all files in timerange)
+      example: '1.0'  
 move_files:
   description: Move files (jpg, gif or mp4)
   fields:
@@ -85,5 +91,8 @@ move_files:
     endtimestamp:
       description: End time for files to include (OPTIONAL, format mm/dd/yy hh:mm:ss)
       example: '26/12/2021 13:00:00'
+    lasthours:
+      description: Select only files from last x hours since lastfile (OPTIONAL, 0.0 (DEFAULT) select all files in timerange)
+      example: '1.0'  
           
 
