@@ -57,6 +57,8 @@ This service has to be called with the following calll-parameters:
 | exclude  |  list of files to exclude in conversion |optional   |
 | begintimestamp  |  begin timestamp | optional, format 'mm/dd/yyyy hh:mm:ss'   |
 | endtimestamp  | end timestamp  |  optional, format 'mm/dd/yyyy hh:mm:ss'   |
+| lasthours  |  Select only files from last x hours since lastfile in selected timerange| optional, Default=0.0 =>select all files in the timerange |
+
 
 ## File selection
 
@@ -82,6 +84,9 @@ Files with **creation time** greater or equal then `begintimestamp`wil be select
 Only `endtimestamp` is defined:
 Files with **creation time** less or equal then `endtimestamp`wil be selected and proccesed for the output file.
 
+The `lasthours` parameter that allows you to select only the latest `x.x` hours from the **latest image** within the given timerange. This parameters allows you to only include the snapshots that are made (for example) the last 2 hours in the fileselection.
+**N.B.** The use of the lasthour parameter could give you files that are create before the begintimestamp you defined.
+
 Example for usage:
 
 
@@ -101,6 +106,8 @@ Example for usage:
 | exclude  |  list of files to exclude in conversion |optional   |
 | begintimestamp  |  begin timestamp | optional, format 'mm/dd/yyyy hh:mm:ss'   |
 | endtimestamp  | end timestamp  |  optional, format 'mm/dd/yyyy hh:mm:ss'   |
+| lasthours  |  Select only files from last x hours since lastfile in selected timerange| optional, Default=0.0 =>select all files in the timerange |
+
 
 The file selection function defined by exclude and the timestamps are identical as in the use with `imagedirectory.create_gif_mp4`
 
@@ -112,6 +119,8 @@ The file selection function defined by exclude and the timestamps are identical 
 | exclude  |  list of files to exclude in conversion |optional   |
 | begintimestamp  |  begin timestamp | optional, format 'mm/dd/yyyy hh:mm:ss'   |
 | endtimestamp  | end timestamp  |  optional, format 'mm/dd/yyyy hh:mm:ss'   |
+| lasthours  |  Select only files from last x hours since lastfile in selected timerange| optional, Default=0.0 =>select all files in the timerange |
+
 
 The file selection function defined by exclude and the timestamps are identical as in the use with `imagedirectory.create_gif_mp4`
 
@@ -193,8 +202,6 @@ The example above selects only the files, from the last 2 hours, since the time 
 | lasthours  |  Select only files from last x hours since lastfile in selected timerange| optional, Default=0.0 =>select all files in the timerange |
 
 The file selection function defined by exclude and the timestamps are identical as in the use with `imagedirectory.create_gif_mp4` service.
-
-The only addition is the `lasthours` parameter that allows you to select only the latest `x.x` hours from the latest images within the given timerange. This parameters allows you to only include the snapshots that are made (for example) the last 2 hours to display in the camera.
 
 The No. of files and the selected files that the camera is using are available as Attribute and could be examined under the developer tools under the STATES tab.
 
