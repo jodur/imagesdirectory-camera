@@ -28,6 +28,24 @@ camera_clear_image_filelist:
     entity_id:
       description: Name of the entity_id of the camera to update
       example: 'camera.local_file'      
+camera_toggle_pause:
+  description: Use this service to pause the timelapse/slideshow of the camera.
+  fields:
+    entity_id:
+      description: Name of the entity_id of the camera to update
+      example: 'camera.local_file'      
+camera_next_image:
+  description: Use this service to display the next image of the filelist.
+  fields:
+    entity_id:
+      description: Name of the entity_id of the camera to update
+      example: 'camera.local_file'  
+camera_prev_image:
+  description: Use this service to display the previous image of the filelist.
+  fields:
+    entity_id:
+      description: Name of the entity_id of the camera to update
+      example: 'camera.local_file'            
 create_gif_mp4:
   description: Create GIF/MP4 from selected snapshots
   fields:
@@ -95,4 +113,3 @@ move_files:
       description: Select only files from last x hours since lastfile (OPTIONAL, 0.0 (DEFAULT) select all files in timerange)
       example: '1.0'  
           
-
