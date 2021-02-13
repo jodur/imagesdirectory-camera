@@ -171,7 +171,7 @@ For example the event, in case of the service call: ` imagedirectort.create_gif_
 ```
 # Camera entity
 
-Altough the generated gif or mp4 could be easily displayed using the existing available camera entities in homeassistant, the availbilty of a camera component that is capable of directly serving the images to a camera component is much easier, more flexible and more user friendly.
+Altough the generated gif or mp4 could be easily displayed using the existing available camera entities in homeassistant, the availbilty of a camera component that is capable of directly serving the images to a camera component as a slideshow is much easier, more flexible and more user friendly. Also additional services are available to pause the slide show and using other services (next and previous) to browse mannualy trough the imagelist the cameraview is serving. An example to use these services in combination with a camera view by using the lovelace picture elements card will also be provided.
 
 ## Configuration
 To enable this camera in your installation, you must first have an existing directory with images files
@@ -207,9 +207,12 @@ The No. of files and the selected files that the camera is using are available a
 
 ## Camera services
 
-The imagelist that the camera is using can be changed with  2 available service :
+The imagelist that the camera is using can be manipulated with  5 available service :
 
-`imagedirectory.camera_update_image_filelist` and `imagedirectory.camera_clear_image_filelist`
+`imagedirectory.camera_update_image_filelist`, `imagedirectory.camera_clear_image_filelist`,
+`imagedirectory.camera_camera_toggle_pause`,
+`imagedirectory.camera_next_image` and
+`imagedirectory.camera_prev_image`
 
 #### SERVICE : imagedirectory.camera_update_image_filelist
 
@@ -235,6 +238,103 @@ This service clears the imagelist that the camera is using. The camera will blan
 | Parameter  | Description  | additional  |
 | ------------ | ------------ | ------------ |
 |entity_id |  entity_id of camera | mandatory  |
+
+#### SERVICE : imagedirectory.camera_toggle_pause
+
+This service will toggle the pause mode. When pause mode is activated the slideshow will be halted for 1  minute, so the current image in the cameraview we be freezed. By default the pause mode is off by default. When calling the other services `imagedirectory.camera_next_image` and `imagedirectory.camera_prev_image` during pause mode the 1 minute will be restarted. The pausemode of the camera will be reflected in the entity status of the camera. States are : `streaming` and `paused`
+
+| Parameter  | Description  | additional  |
+| ------------ | ------------ | ------------ |
+|entity_id |  entity_id of camera | mandatory  |
+
+#### SERVICE : imagedirectory.camera_next_image
+
+This service will skip to the next image in the imagelist. When the end of the list is reached it will automatically skip to the first image of the image list with the next call.
+
+| Parameter  | Description  | additional  |
+| ------------ | ------------ | ------------ |
+|entity_id |  entity_id of camera | mandatory  |
+
+#### SERVICE : imagedirectory.camera_prev_image
+
+This service will skip to the previous image in the imagelist. When the begining of the list is reached it will stay on the first image of the image list with the next call.
+
+| Parameter  | Description  | additional  |
+| ------------ | ------------ | ------------ |
+|entity_id |  entity_id of camera | mandatory  |
+
+# Example camera view with picture elements:
+This shows an example how to use the camera services to show and browse trough a imagelist.
+
+![alt text](https://github.com/jodur/imagesdirectory-camera/blob/main/document/camera_example_1.png?raw=true)
+![alt text](https://github.com/jodur/imagesdirectory-camera/blob/main/document/camera_example_2.png?raw=true)
+
+To use a view as above insert a picture elements card with the following configuration and replace the camera-entity with your own entity-id:
+
+```yaml
+type: picture-elements
+title: Achtertuin
+entity: camera.achtertuin_motion
+camera_image: camera.achtertuin_motion
+camera_view: live
+elements:
+  - type: icon
+    icon: 'mdi:skip-previous'
+    style:
+      background: 'rgba(255, 255, 255, 0.25)'
+      right: 50px
+      bottom: 25px
+    tap_action:
+      action: call-service
+      service: imagedirectory.camera_prev_image
+      service_data:
+        entity_id: camera.achtertuin_motion
+  - type: icon
+    icon: 'mdi:skip-next'
+    style:
+      background: 'rgba(255, 255, 255, 0.25)'
+      right: 0px
+      bottom: 25px
+    tap_action:
+      action: call-service
+      service: imagedirectory.camera_next_image
+      service_data:
+        entity_id: camera.achtertuin_motion
+  - type: conditional
+    conditions:
+      - entity: camera.achtertuin_motion
+        state: streaming
+    elements:
+      - type: icon
+        icon: 'mdi:pause'
+        style:
+          background: 'rgba(255, 255, 255, 0.25)'
+          bottom: 25px
+          right: 25px
+        tap_action:
+          action: call-service
+          service: imagedirectory.camera_toggle_pause
+          service_data:
+            entity_id: camera.achtertuin_motion
+  - type: conditional
+    conditions:
+      - entity: camera.achtertuin_motion
+        state: paused
+    elements:
+      - type: icon
+        icon: 'mdi:play'
+        style:
+          background: 'rgba(255, 255, 255, 0.25)'
+          bottom: 25px
+          right: 25px
+        tap_action:
+          action: call-service
+          service: imagedirectory.camera_toggle_pause
+          service_data:
+            entity_id: camera.achtertuin_motion
+
+```
+
 
 # Examples (Use cases):
 
