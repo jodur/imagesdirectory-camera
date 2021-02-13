@@ -6,6 +6,7 @@ Supported operations:
 - compose an animated GIF or MP4 of selected snapshot (PNG, JPEG)
 - delete or move files (JPG,PNG,GIF and MP4)
 - looping timelaps camera for selected snapshots/images
+- browse trough images manually while displaying them in a camera view
 
 ****
 This component was developed by my need of creating a looping animation from snapshot images that where created by the deepstack custom component.
