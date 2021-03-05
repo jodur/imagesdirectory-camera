@@ -1,6 +1,7 @@
 {
   "domain": "imagedirectory",
   "name": "Local Image Filelist",
+  "version": "0.6.1",
   "documentation": "https://github.com/jodur/imagedirectory-camera",
   "requirements": [
                   "pillow",
