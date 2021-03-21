@@ -56,8 +56,8 @@ This service has to be called with the following calll-parameters:
 |  filename |	Name for gif/mp3 file (without extension)   | optional, default=latest  |
 |  format |  `gif` or `mp4` | optional, default='gif'   |
 | exclude  |  list of files to exclude in conversion |optional   |
-| begintimestamp  |  begin timestamp | optional, format 'mm/dd/yyyy hh:mm:ss'   |
-| endtimestamp  | end timestamp  |  optional, format 'mm/dd/yyyy hh:mm:ss'   |
+| begintimestamp  |  begin timestamp | optional, format 'dd/mm/yyyy hh:mm:ss'   |
+| endtimestamp  | end timestamp  |  optional, format 'dd/mm/yyyy hh:mm:ss'   |
 | lasthours  |  Select only files from last x hours since lastfile in selected timerange| optional, Default=0.0 =>select all files in the timerange |
 
 
