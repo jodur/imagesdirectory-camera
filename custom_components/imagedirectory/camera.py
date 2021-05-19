@@ -12,7 +12,6 @@ from homeassistant.core import HassJob
 import voluptuous as vol
 
 from homeassistant.components.camera import (
-    CAMERA_SERVICE_SCHEMA,
     PLATFORM_SCHEMA,
     Camera,
 )
@@ -40,6 +39,7 @@ from homeassistant.helpers import config_validation as cv
 
 from . import Getfileslist
 
+
 # camera service
 SERVICE_UPDATE_IMAGE_FILELIST = "camera_update_image_filelist"
 SERVICE_CLEAR_IMAGE_FILELIST = "camera_clear_image_filelist"
@@ -62,6 +62,12 @@ STATE_STREAMING = "streaming"
 ALLOWED_EXT = [".jpg", ".png"]
 
 _LOGGER = logging.getLogger(__name__)
+
+CAMERA_SERVICE_SCHEMA = vol.Schema(
+    {
+        vol.Required(ATTR_ENTITY_ID): cv.comp_entity_ids
+    }
+)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
