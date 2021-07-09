@@ -526,7 +526,7 @@ sequence:
  - service: imagedirectory.delete_files
     data:
       sourcepath: /config/snapshots/achtertuin
-      excludelist: deepstack_object_achtertuin_latest.jpg
+      exclude: deepstack_object_achtertuin_latest.jpg
       endtimestamp: '{{endtime}}'
 mode: single
 
