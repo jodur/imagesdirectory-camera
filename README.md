@@ -100,7 +100,7 @@ Example for usage:
 | begintimestamp | '25/12/2020 23:24:24'  |
 | endtimestamp: | '25/12/2020 23:24:40  |
 
-### **imagedirectory.delete**
+### **imagedirectory.delete_files**
 | Parameter  | Description  | additional  |
 | ------------ | ------------ | ------------ |
 | sourcepath  |  	directory where the snaphots are in | mandatory, directory must exist  |
@@ -112,7 +112,7 @@ Example for usage:
 
 The file selection function defined by exclude and the timestamps are identical as in the use with `imagedirectory.create_gif_mp4`
 
-### **imagedirectory.move**
+### **imagedirectory.move_files**
 | Parameter  | Description  | additional  |
 | ------------ | ------------ | ------------ |
 | sourcepath  |  	path of the directory where the snaphots are in | mandatory, directory must exist  |
