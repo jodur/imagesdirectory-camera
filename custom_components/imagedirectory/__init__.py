@@ -59,7 +59,7 @@ SNAPTOGIF_DEL_SCHEMA = vol.Schema(
         vol.Optional(SERVICE_PARAM_BEGINTIME, default=EPOCH_START): cv.matches_regex(
             r"[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]"
         ),
-        vol.Optional(SERVCE_PARAM_ENDTIME, default=EPOCH_START): cv.matches_regex(
+        vol.Optional(SERVCE_PARAM_ENDTIME, default=EPOCH_END): cv.matches_regex(
             r"[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]"
         ),
         vol.Optional(SERVICE_PARAM_LASTHOURS, default=0.0): cv.positive_float,
@@ -73,7 +73,7 @@ SNAPTOGIF_MOVE_SCHEMA = vol.Schema(
         vol.Optional(SERVICE_PARAM_BEGINTIME, default=EPOCH_START): cv.matches_regex(
             r"[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]"
         ),
-        vol.Optional(SERVCE_PARAM_ENDTIME, default=EPOCH_START): cv.matches_regex(
+        vol.Optional(SERVCE_PARAM_ENDTIME, default=EPOCH_END): cv.matches_regex(
             r"[0-3][0-9]/[0-1][0-9]/\d{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]"
         ),
         vol.Optional(SERVICE_PARAM_LASTHOURS, default=0.0): cv.positive_float,
