@@ -411,7 +411,7 @@ class LocalFile(Camera):
         return self._name
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the camera state attributes."""
         attrs = {}
         attrs["directory"] = self._path
